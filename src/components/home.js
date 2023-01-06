@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Questions from "./questions";
 import Time from "./time";
 import { useState } from "react";
@@ -14,24 +14,41 @@ function Home(props) {
         ? j[0][i]
         : "";
   }
-  function fn(callback) {
-    let h = new XMLHttpRequest();
-    h.onreadystatechange = () => {
-      if (h.readyState == 4 && h.status == 200) {
-        questions = JSON.parse(h.response);
-        callback(questions);
-        props.play(true);
-      }
-    };
-    h.open("GET", "http://127.0.0.1/pj/download.php", true);
-    h.send();
-  }
-  fn((qst) => {
-    if (props.force == 1) {
-      setQuestions(qst);
-      props.fn();
+  useEffect(() => {
+    function fn(callback) {
+      let h = new XMLHttpRequest();
+      h.onreadystatechange = () => {
+        if (h.readyState == 4 && h.status == 200) {
+          questions = JSON.parse(h.response);
+          callback(questions);
+          props.play(true);
+        }
+      };
+      h.open("GET", "http://127.0.0.1/pj/download.php", true);
+      h.send();
     }
-  });
+    fn((qst) => {
+      setQuestions(qst);
+    });
+  }, []);
+  // function fn(callback) {
+  //   let h = new XMLHttpRequest();
+  //   h.onreadystatechange = () => {
+  //     if (h.readyState == 4 && h.status == 200) {
+  //       questions = JSON.parse(h.response);
+  //       callback(questions);
+  //       props.play(true);
+  //     }
+  //   };
+  //   h.open("GET", "http://127.0.0.1/pj/download.php", true);
+  //   h.send();
+  // }
+  // fn((qst) => {
+  //   if (props.force == 1) {
+  //     setQuestions(qst);
+  //     props.fn();
+  //   }
+  // });
 
   return (
     <div>

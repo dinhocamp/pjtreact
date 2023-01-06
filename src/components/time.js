@@ -18,6 +18,10 @@ function Time(props) {
     //   }
     // }
     // setmyvar(setInterval(ber, 1000));
+    if (clicked) {
+      clearTimeout(myvar);
+      return;
+    }
     function deb(counter) {
       function ber() {
         counter--;
@@ -36,7 +40,7 @@ function Time(props) {
       ber();
     }
     deb(time);
-  }, []);
+  }, [clicked]);
   return (
     <>
       <h3>
@@ -46,8 +50,6 @@ function Time(props) {
         onClick={(e) => {
           e.preventDefault();
           setclick(true);
-          clearTimeout(myvar);
-          clearTimeout(myvar);
           document.cookie = `time=0;Max-age=0`;
           props.play(false);
           return;
