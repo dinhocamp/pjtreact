@@ -8,7 +8,6 @@ function Time(props) {
   }, [clicked]);
   useEffect(() => {
     if (clicked) {
-      props.play(false);
       clearTimeout(myvar);
       return;
     }
@@ -40,6 +39,10 @@ function Time(props) {
         onClick={(e) => {
           e.preventDefault();
           setclick(true);
+          clearTimeout(myvar);
+          document.cookie = `time=0;Max-age=0`;
+          props.play(false);
+          return;
         }}
       >
         score
