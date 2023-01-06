@@ -31,38 +31,11 @@ function Home(props) {
       setQuestions(qst);
     });
   }, []);
-  // function fn(callback) {
-  //   let h = new XMLHttpRequest();
-  //   h.onreadystatechange = () => {
-  //     if (h.readyState == 4 && h.status == 200) {
-  //       questions = JSON.parse(h.response);
-  //       callback(questions);
-  //       props.play(true);
-  //     }
-  //   };
-  //   h.open("GET", "http://127.0.0.1/pj/download.php", true);
-  //   h.send();
-  // }
-  // fn((qst) => {
-  //   if (props.force == 1) {
-  //     setQuestions(qst);
-  //     props.fn();
-  //   }
-  // });
 
   return (
     <div>
       <Questions qst={questions} />
       {questions.length > 10 && <Time time={parseInt(c)} play={props.play} />}
-      {/* <button
-        onClick={(e) => {
-          e.preventDefault();
-          clearInterval(ref);
-          props.play(false);
-        }}
-      >
-        score
-      </button> */}
     </div>
   );
 }

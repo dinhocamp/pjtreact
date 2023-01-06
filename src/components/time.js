@@ -7,18 +7,8 @@ function Time(props) {
     setclick(true);
   }, [clicked]);
   useEffect(() => {
-    // let counter = time;
-    // function ber() {
-    //   counter--;
-    //   setTime(counter);
-    //   // props.control(myvar);
-    //   document.cookie = `time=${counter};Max-age=${counter}`;
-    //   if (time == 0) {
-    //     clearInterval(myvar);
-    //   }
-    // }
-    // setmyvar(setInterval(ber, 1000));
     if (clicked) {
+      props.play(false);
       clearTimeout(myvar);
       return;
     }
@@ -50,9 +40,6 @@ function Time(props) {
         onClick={(e) => {
           e.preventDefault();
           setclick(true);
-          document.cookie = `time=0;Max-age=0`;
-          props.play(false);
-          return;
         }}
       >
         score
